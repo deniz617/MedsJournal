@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Dev</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <h2> View Journal </h2>
+    <a onclick="FetchEntries()">Click here</a> to show last 10 entries to Journal</br>
+    <a href="./api/download" target="_blank">Click here</a> to Download Journal</br>
+    <h2>Add to Journal</h2>
+    Time: <input id="input_time"><button onclick="SetTime()">Current Time</button></br>
+    Medication: <input id="input_med"></br>
+    <button id="add_button" onclick="PostInput()">Add</button></br>
+    <button hidden=true id="addMore_button" onclick="EnableMoreInput()">Add More</button ></br>
+</body>
+
+<script>
+    function SetTime()
+    {
+        date = new Date()
+        dateString = date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+        document.getElementById("input_time").value = dateString
+    }
+
+    function PostInput()
+    {
+        time = document.getElementById("input_time")
+        med = document.getElementById("input_med")
+
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", "api/add", false)
+        xmlHttp.send(null)
+        
+        // Set result
+        document.getElementById("add_button").innerText2 = document.getElementById("add_button").innerText
+        document.getElementById("add_button").innerText = xmlHttp.responseText
+        document.getElementById("add_button").disabled = true 
+        document.getElementById("add_button").style2 = document.getElementById("add_button").style
+        document.getElementById("add_button").style = "color: #FFFFFF; background-color: #00CC00;"
+        document.getElementById("addMore_button").hidden = false 
+    }
+    function EnableMoreInput()
+    {
+        document.getElementById("add_button").disabled = false
+        document.getElementById("add_button").innerText = document.getElementById("add_button").innerText2
+        document.getElementById("add_button").style = document.getElementById("add_button").style2
+        document.getElementById("addMore_button").hidden = true 
+    }
+
+    function FetchEntries()
+    {
+        
+    }
+</script>
+</html>
