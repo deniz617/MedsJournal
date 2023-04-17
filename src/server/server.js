@@ -9,7 +9,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 app.get('/api', (req, res) => {
-    res.send(`Express version ${version}`)
+    res.send(`Version ${version}`)
 })
 app.get('/api/add', (req, res) => {
    // TODO add to database 
